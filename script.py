@@ -1,33 +1,56 @@
 import os
-from instagrapi import Client
-from datetime import datetime
 import ffmpeg
-import yt_dlp
+from pytube import YouTube
+from datetime import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
-# --- VARIÁVEIS DE AMBIENTE ---
-IG_USER = os.getenv("INSTAGRAM_USER")
-IG_PASS = os.getenv("INSTAGRAM_PASS")
+# --- CONFIGURAÇÕES DE DIRETÓRIOS ---
+RAW_DIR = "videos/raw"
+EDITED_DIR = "videos/edited"
+FONT_PATH = "assets/Montserrat-Bold.ttf"
+CRED_PATH = "assets/credenciais.json"  # JSON da conta de serviço
 
-# --- 1. BAIXAR UM VÍDEO DE GOLAÇO ---
-def baixar_video_youtube(link, output_path):
-    ydl_opts = {
-        'outtmpl': output_path,
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4',
-        'merge_output_format': 'mp4'
-    }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([link])
+# --- CRIA DIRETÓRIOS SE NECESSÁRIOS ---
+os.makedirs(RAW_DIR, exist_ok=True)
+os.makedirs(EDITED_DIR, exist_ok=True)
 
-# --- 2. EDITAR O VÍDEO COM INTRO E TEXTO ---
-def editar_video(input_video, output_video):
+# --- OBTÉM O PRÓXIMO LINK DA PLANILHA GOOGLE SHEETS ---
+def get_next_video_url():
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name(CRED_PATH, scope)
+    client = gspread.authorize(creds)
+
+    sheet = client.open("Golaços").sheet1  # nome da planilha
+    data = sheet.get_all_records()
+
+    for i, row in enumerate(data):
+        if not row.get("usado", "").strip().lower() in ["true", "1", "x"]:
+            sheet.update_cell(i + 2, 2, "TRUE")  # marca como usado (coluna 2)
+            return row["url"]
+
+    raise Exception("Todos os vídeos já foram usados!")
+
+# --- BAIXA O VÍDEO DO YOUTUBE ---
+def baixar_video():
+    url = get_next_video_url()
+    yt = YouTube(url)
+    stream = yt.streams.filter(file_extension='mp4', res="720p").first()
+    output_path = os.path.join(RAW_DIR, f"{yt.video_id}.mp4")
+    stream.download(output_path=RAW_DIR, filename=f"{yt.video_id}.mp4")
+    print(f"[✔] Vídeo baixado: {output_path}")
+    return output_path, yt.video_id
+
+# --- ADICIONA TEXTO SOBREPOSTO NO VÍDEO ---
+def editar_video(input_video, video_id):
+    output_video = os.path.join(EDITED_DIR, f"{video_id}_editado.mp4")
     legenda = "E se existisse uma página só com golaços do futebol?"
-    fonte = "assets/font.ttf"  # Se quiser usar uma fonte específica
 
     (
         ffmpeg
         .input(input_video)
         .filter("drawtext",
-                fontfile=fonte,
+                fontfile=FONT_PATH,
                 text=legenda,
                 fontcolor='white',
                 fontsize=48,
@@ -40,21 +63,15 @@ def editar_video(input_video, output_video):
         .run(overwrite_output=True)
     )
 
-# --- 3. POSTAR NO INSTAGRAM ---
-def postar_instagram(caminho_video):
-    cl = Client()
-    cl.login(IG_USER, IG_PASS)
+    print(f"[✔] Vídeo editado: {output_video}")
+    return output_video
 
-    legenda = "E se existisse uma página só com golaços do futebol? ⚽🔥\n\n#futebol #golaço #soccer"
-    cl.clip_upload(caminho_video, legenda)
+# --- EXECUÇÃO PRINCIPAL ---
+def main():
+    print(f"🚀 Execução iniciada: {datetime.now()}")
+    input_path, video_id = baixar_video()
+    editar_video(input_path, video_id)
+    print(f"✅ Finalizado às {datetime.now()}")
 
-# --- EXECUÇÃO COMPLETA ---
 if __name__ == "__main__":
-    yt_link = "https://www.youtube.com/watch?v=gzrKQuJAPSE"  # <- substitua por um link válido
-    raw_video = "videos/raw/golaco.mp4"
-    final_video = f"videos/edited/golaco_{datetime.now().strftime('%H%M')}.mp4"
-
-    baixar_video_youtube(yt_link, raw_video)
-    editar_video(raw_video, final_video)
-    postar_instagram(final_video)
-
+    main()
