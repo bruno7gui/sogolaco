@@ -1,3 +1,6 @@
 yt-dlp
 instagrapi
 ffmpeg-python
+gspread
+google-auth
+oauth2client
