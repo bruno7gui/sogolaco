@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sogolaco",
+  "private_key_id": "fb457068acf4d779dd1e6decfdf7610424f28bfc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0pJlKVE/cPB1i\nLWScPMjHOSmCQGOxpTJ3zeJiYybicUoJZb+eO4eZ8m/cyJ3dY3ShkxQgznFXlAkD\n0UlRGG9hYqAI/NBJHmJq/zkzZKunxhueRGdsxH3wqUFYKA3giXzqXdSHCOf6lHdk\nLuFyXUY+6LSBiFTOBWIkvdvnYVQKanZrrwiK+FBvWbGi0d6X49MifvHu+Yafttin\nx0bl9l2R0N+KXc8BCjYPp4zoUGNMYgRYtuCXdqit8Ys6vdFPQ/z9W1onC6C9xaCd\nMxT3KxzycwW5ii1rZcGahNvDxmNcB0YckwLAh2T0ayqq7P9DkHQWrsSzaEHZTIsQ\nmLR1/iCfAgMBAAECggEATElAtSui6Cp47DeoR/TBg6THu0pu75wIkqCfTJZ72uAl\n+I8AG5YfP2urQu10AYUZQYzH0Mzt/6K0JekR0c4EZ3eLhxAg8+gBfxcWdHY8qacX\njcBsfvoCB4qq3kxYA+18E8uZT4d61A8z1lqX+cCbREDozdUhnzmVx1dokS/Amn7C\nhv/5dz48vbYMvZ1w28mGtwEVVafMJzyxoBTH/99iek94XRUwPNLdY1n9cR7GX1l8\nPjdV/gn7swhioApgdrQOenucRLVPiKwCja97mr4cTkyjlf5JvcfxpXf1+HsWwErt\nG+b/d+ZecnuwJ2EpP/QV68p7X5E3swpfgb5ZCAoyEQKBgQDgKs3WfpzADiyhoMie\n5w87I0AKyTfmZ2KGXOlxeNg+OjVwzKgfWT+DQEFRUv+I49MYCnM/Ptz6oSCjsgtd\nviz4pmzhV6gwVoPNEu7Dkg8MtBVy78flbnYF+WkEf/CrxeKAcfvtlyUPz0mFW6J6\nTIV9ox5A498K97HGK2XviPVQ8QKBgQDOS4yZC+vKW3rpzOnMyw3yVr2gKbM8LLju\nlk20KH66WhdYS82yCrBboSbfwW9dCogSonygCKaKF3PSr49NbL4wrrEtIWs7/pwn\nBY0uEqMYWOKOyCHS9bqtW5nH892kWlCVmN3gaoIgFKuYSRYTrr0/Z7dtTRArhlwo\nRMW+rJSKjwKBgQC9BLrOG7LW6tzNaMLh4llgd0fAEI2XNSPJwjyBlvFX/0Mimx9E\nV8ALTzoEdeTMq7ZKtj0ZXkt89jKMdUvKPtqyy7pRhNVn9PtsB4PW2qjgAFV5tiAr\nIKpaPUVFKxBn9xMXVYWlgGYa36HR1kO5th51ov6Wns5q9BMt01g/049vMQKBgAd3\nbItNhyc30GcN55hl8QdIZGyblcUjyT25au6OWKfeAuJLPBKpmGB4oLOQiLtRWkNy\nZhhUt9Jfru19NS6UNP4GFJuRjhQJzxUKemWkfwqujOSmEbNU+YC0xAgcp3T/X9NK\nSR2KPVNz7BIC8y2bMXZOBrGKDH/GyScb9hxEmsu5AoGAej9ALuiWydzGGVXLXJeH\nSwuipN0estlY1ye9kq+Ryg1FPHhUuNDadVopVHWNkvGqRjgHub01FTtZ8pocPhi2\nSiczF0xO9hGmHthC3lc1WBWer1ZMa7taeOIiQiLfMa2NSLkz0gqQbEU2YswJ3Sws\nnUFDpxJuvASRiEoPz67NvOE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "sogolaco@sogolaco.iam.gserviceaccount.com",
+  "client_id": "105526180049084062160",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sogolaco%40sogolaco.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
