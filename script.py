@@ -21,7 +21,7 @@ def get_next_video_url():
     creds = ServiceAccountCredentials.from_json_keyfile_name(CRED_PATH, scope)
     client = gspread.authorize(creds)
 
-    sheet = client.open("Golaços").sheet1  # nome da planilha
+    sheet = client.open("so_golacos").sheet1  # nome da planilha
     data = sheet.get_all_records()
 
     for i, row in enumerate(data):
